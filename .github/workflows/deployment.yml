@@ -44,6 +44,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           source: "."
           target: "/var/www/html"
           strip_components: 1
