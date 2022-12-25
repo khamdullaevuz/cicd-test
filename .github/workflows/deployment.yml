@@ -43,8 +43,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
+          password: ${{ secrets.PASSWORD }}
           source: "."
-          target: "/var/www/html"
+          target: "/var/www/khamdullaev.tech"
           strip_components: 1
