@@ -23,10 +23,10 @@ jobs:
           tools: composer:v2
       - name: Install dependencies
         run: composer dump-autoload --optimize
-  # zip the files and push to the server
   deployment:
-    runs-on: ubuntu-latest
+    # all files tar gz and upload to server
     needs: build
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Setup PHP
@@ -38,17 +38,12 @@ jobs:
           tools: composer:v2
       - name: Install dependencies
         run: composer dump-autoload --optimize
-      - name: Zip files
-        run: tar -zcvf khamdullaev.tech.tar.gz ./
-      # clear host files
-      - name: Clear host files
-        run: ssh -i ${{ secrets.SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "rm -rf /var/www/elbekjohn/data/khamdullaev.tech/*"
-      # upload files to host
-      - name: Upload files to host
-        run: scp -i ${{ secrets.SSH_KEY }} khamdullaev.tech.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/elbekjohn/data/khamdullaev.tech/
-      # extract files
-      - name: Extract files
-        run: ssh -i ${{ secrets.SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "tar -zxvf /var/www/elbekjohn/data/khamdullaev.tech/khamdullaev.tech.tar.gz -C /var/www/elbekjohn/data/khamdullaev.tech/"
-      # remove zip file
-      - name: Remove zip file
-        run: ssh -i ${{ secrets.SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "rm -rf /var/www/elbekjohn/data/khamdullaev.tech/khamdullaev.tech.tar.gz"
+      - name: Upload to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          source: "."
+          target: "/var/www/html"
+          strip_components: 1
