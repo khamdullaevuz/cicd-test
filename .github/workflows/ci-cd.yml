@@ -1,7 +1,10 @@
-name: PHP CD
+name: PHP CI/CD
 
 on:
   push:
+    branches:
+      - master
+  pull_request:
     branches:
       - master
 
@@ -20,6 +23,12 @@ jobs:
           tools: composer:v2
       - name: Install dependencies
         run: composer dump-autoload --optimize
+
+on:
+  push:
+    branches:
+      - master
+jobs:
   deployment:
     # all files tar gz and upload to server
     needs: build
