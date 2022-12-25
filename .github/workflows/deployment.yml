@@ -23,9 +23,10 @@ jobs:
           tools: composer:v2
       - name: Install dependencies
         run: composer dump-autoload --optimize
+  # zip the files and push to the server
   deployment:
-    needs: build
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v2
       - name: Setup PHP
@@ -37,15 +38,15 @@ jobs:
           tools: composer:v2
       - name: Install dependencies
         run: composer dump-autoload --optimize
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
+      - name: Zip files
+        run: zip -r -X -q -9 -o -y -j -i *
+      - name: Upload files
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
+          password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: |
-            cd /var/www/elbekjohn/data/www/khamdullaev.tech
-            git pull origin master
-            composer dump-autoload --optimize
+          source: "*.zip"
+          target: "/var/www/elbekjohn/www/khamdullaev.tech"
+          script: "unzip -o *.zip && rm -rf *.zip"
