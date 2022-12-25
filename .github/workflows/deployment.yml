@@ -1,4 +1,4 @@
-name: PHP CI/CD deployment
+name: PHP CI/CD Deployment
 
 on:
   push:
