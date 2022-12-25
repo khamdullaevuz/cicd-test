@@ -1,5 +1,5 @@
 <?php
-$title = "Homepage";
+$title = "Hello world";
 require 'layouts/header.layout.php';
 ?>
 <div class="container">
