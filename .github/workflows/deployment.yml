@@ -20,7 +20,6 @@ jobs:
       - name: Install dependencies
         run: composer dump-autoload --optimize
   deployment:
-    # all files tar gz and upload to server
     needs: build
     runs-on: ubuntu-latest
     steps:
