@@ -45,5 +45,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           source: "."
-          target: "/var/www/khamdullaev.tech"
+          target: "/var/www/elbekjohn/data/www/khamdullaev.tech"
           strip_components: 1
