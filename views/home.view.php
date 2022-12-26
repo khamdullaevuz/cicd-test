@@ -3,7 +3,7 @@ $title = "Homepage";
 require 'layouts/header.layout.php';
 ?>
 <div class="container">
-    <h1>Hello world!</h1>
+    <h1>Homepage</h1>
     <p>This is site deployed with CI/CD on github actions!</p>
     <p><a class="text-decoration-none" href="https://github.com/khamdullaevuz/cicd-test">Repo</a></p>
 </div>
