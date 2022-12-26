@@ -6,7 +6,7 @@ use PDO;
 
 class Core
 {
-    const APP_NAME = "MVC";
+    const APP_NAME = "khamdullaev.tech";
 
     const HOSTNAME = "localhost";
     const DBNAME = "mvc";
